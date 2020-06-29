@@ -117,43 +117,17 @@ namespace treeview
 
         }
 
-        private void btnThem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBoqua_Click(object sender, EventArgs e)
-        {
-
-        }
-
+   
         private void btnThem_Click_1(object sender, EventArgs e)
         {
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
-            btnBoqua.Enabled = true;
+
             btnLuu.Enabled = true;
             btnThem.Enabled = true;
             btnThem.Enabled = false;
             txtmasach.Enabled = true; //cho phép nhập mới
             ResetValue();
             txttieude.Focus();
-        }
-        
+        }       
 
 
         
@@ -185,73 +159,31 @@ namespace treeview
                 txtmasach.Text + "',N'" + txttieude.Text + "')";
             Class.Functions.RunSQL(sql); //Thực hiện câu lệnh sql
             Loadbang(); //Nạp lại DataGridView
-            btnXoa.Enabled = true;
+   
             btnThem.Enabled = true;
-            btnSua.Enabled = true;
-            btnBoqua.Enabled = false;
+
             btnLuu.Enabled = false;
             ResetValue();
             txtmasach.Enabled = false;
         }
 
-        private void btnBoqua_Click_1(object sender, EventArgs e)
+
+
+
+
+
+        private void btnexit_Click(object sender, EventArgs e)
         {
-            ResetValue();
-            btnBoqua.Enabled = false;
-            btnThem.Enabled = true;
-            btnXoa.Enabled = true;
-            btnSua.Enabled = true;
-            btnLuu.Enabled = false;
-            txtmasach.Enabled = false;
+            this.Close();
         }
 
-        private void btnXoa_Click_1(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            string sql;
-            if (tblCL.Rows.Count == 0)
-            {
-                MessageBox.Show("Không còn dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if (txtmasach.Text == "") //nếu chưa chọn bản ghi nào
-            {
-                MessageBox.Show("Bạn chưa chọn bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if (MessageBox.Show("Bạn có muốn xoá không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                sql = "DELETE tblChatlieu WHERE Machatlieu=N'" + txtmasach.Text + "'";
-                Class.Functions.RunSqlDel(sql);
-                ResetValue();
-                Loadbang();
-            }
-        }
-
-        private void btnSua_Click_1(object sender, EventArgs e)
-        {
-            string sql; //Lưu câu lệnh sql
-            if (tblCL.Rows.Count == 0)
-            {
-                MessageBox.Show("Không còn dữ liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if (txtmasach.Text == "") //nếu chưa chọn bản ghi nào
-            {
-                MessageBox.Show("Bạn chưa chọn bản ghi nào", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if (txttieude.Text.Trim().Length == 0) //nếu chưa nhập tên chất liệu
-            {
-                MessageBox.Show("Bạn chưa nhập tên chất liệu", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            sql = "UPDATE Sach SET Tieude=N'" +
-                txttieude.Text.ToString() +
-                "' WHERE Machatlieu=N'" + txtmasach.Text + "'";
-            Class.Functions.RunSQL(sql);
+            Functions.Connect();
+            //txtmasach.Enabled = false;
+            //txttieude.Enabled = false;
+            //btnBoqua.Enabled = false;
             Loadbang();
-            ResetValue();
-            btnBoqua.Enabled = false;
         }
     }
 }
